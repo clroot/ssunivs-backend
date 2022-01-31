@@ -7,7 +7,7 @@ dotenv.config();
 let DATASOURCE_URL = process.env.DATASOURCE_URL;
 let testDatabase = undefined;
 
-if (process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV === 'test' || !DATASOURCE_URL) {
   const sqlite3Database = ':memory:';
 
   sqlite3.verbose();
@@ -20,7 +20,7 @@ const sequelize = new Sequelize(DATASOURCE_URL);
 export const closeDatabase = async () => {
   await sequelize.close();
 
-  if (process.env.NODE_ENV === 'test') {
+  if (testDatabase) {
     testDatabase.close();
   }
 };
