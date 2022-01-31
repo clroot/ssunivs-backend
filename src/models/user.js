@@ -25,9 +25,30 @@ class User extends Model {
     });
   }
 
+  /** @return {string} */
+  getId() {
+    return this.id;
+  }
+
+  /** @return {string} */
+  getUsername() {
+    return this.username;
+  }
+
+  /** @return {string} */
+  getEmail() {
+    return this.email;
+  }
+
+  /** @return {string} */
+  getRole() {
+    return this.role;
+  }
+
   /**
    * set user password as hashed
    * @param {string} password
+   * @return {Promise<>}
    * */
   async setPassword(password) {
     this.password = await bcrypt.hash(password, 10);

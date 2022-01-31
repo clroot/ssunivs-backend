@@ -1,7 +1,6 @@
 import { randEmail, randPassword, randUserName } from '@ngneat/falso';
-import { User } from '/models';
+import { User, UserRole } from '/models';
 import { createTestUser, initDatabase, removeTestUser } from '/__test__/helper';
-import bcrypt from 'bcrypt';
 
 describe('User Model 은', () => {
 
@@ -24,30 +23,40 @@ describe('User Model 은', () => {
   });
 
   it('email, username, password 필드를 가진다', async () => {
+    // given
     const beforeCount = await User.count();
 
+    // when
     let user = await User.create(userPayload);
     await user.setPassword(testUserPassword);
 
-    expect(user.username).toBe(testUsername);
-    expect(user.email).toBe(testUserEmail);
-    expect(await bcrypt.compare(testUserPassword, user.password)).toBeTruthy();
+    // then
     expect(await User.count()).toBeGreaterThan(beforeCount);
+    expect(user.getUsername()).toBe(testUsername);
+    expect(user.getEmail()).toBe(testUserEmail);
+    expect(user.getRole()).toBe(UserRole.USER);
+    expect(await user.checkPassword(testUserPassword)).toBeTruthy();
   });
 
   it('findByPk 메서드 테스트', async () => {
+    // given
     const userId = await createTestUser(userPayload);
 
+    // when
     const user = await User.findByPk(userId);
 
-    expect(user.username).toBe(testUsername);
+    // then
+    expect(user.getUsername()).toBe(testUsername);
   });
 
   it('findByEmail 메서드 테스트', async () => {
+    // given
     await createTestUser(userPayload);
 
+    // when
     const user = await User.findByEmail(testUserEmail);
 
-    expect(user.username).toBe(testUsername);
+    // then
+    expect(user.getUsername()).toBe(testUsername);
   });
 });

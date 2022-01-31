@@ -1,8 +1,8 @@
 import { randEmail, randPassword, randSentence, randText, randUserName } from '@ngneat/falso';
-import { Board, User } from '/models';
+import { Post, User } from '/models';
 import { createTestUser, initDatabase, removeTestUser } from '/__test__/helper';
 
-describe('Board Model 은', () => {
+describe('Post Model 은', () => {
 
   const testUserEmail = randEmail();
   const testUsername = randUserName();
@@ -29,22 +29,22 @@ describe('Board Model 은', () => {
   describe('성공시', () => {
     it('게시글을 저장한다.', async () => {
       // given
-      const beforeCounter = await Board.count();
+      const beforeCounter = await Post.count();
       let title = randText();
       let content = randSentence();
 
       // when
-      const board = await Board.register({
+      const post = await Post.register({
         title,
         content,
         user: testUser,
       });
 
       // then
-      expect(await Board.count()).toBeGreaterThan(beforeCounter);
-      expect(board.getTitle()).toBe(title);
-      expect(board.getContent()).toBe(content);
-      expect(await board.getWriter()).toStrictEqual(testUser);
+      expect(await Post.count()).toBeGreaterThan(beforeCounter);
+      expect(post.getTitle()).toBe(title);
+      expect(post.getContent()).toBe(content);
+      expect(await post.getWriter()).toStrictEqual(testUser);
     });
   });
 });

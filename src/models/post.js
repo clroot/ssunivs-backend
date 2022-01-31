@@ -2,16 +2,16 @@ import { DataTypes, Model } from 'sequelize';
 import sequelize from '/database';
 import User from './user';
 
-class Board extends Model {
+class Post extends Model {
   /**
    * @param {Object} payload
    * @param {string} payload.title
    * @param {string} payload.content
    * @param {User} payload.user
-   * @return {Promise<Board>}
+   * @return {Promise<Post>}
    */
   static async register({ title, content, user }) {
-    let instance = await Board.build();
+    let instance = await Post.build();
 
     instance.title = title;
     instance.content = content;
@@ -43,12 +43,12 @@ class Board extends Model {
   }
 }
 
-Board.init({
+Post.init({
   id: {
     type: DataTypes.BIGINT,
     autoIncrement: true,
     primaryKey: true,
-    field: 'board_id',
+    field: 'post_id',
   },
   title: {
     type: DataTypes.STRING,
@@ -58,9 +58,9 @@ Board.init({
   },
 }, {
   sequelize,
-  modelName: 'Board',
-  tableName: 'boards',
+  modelName: 'Post',
+  tableName: 'posts',
   indexes: [],
 });
 
-export default Board;
+export default Post;
