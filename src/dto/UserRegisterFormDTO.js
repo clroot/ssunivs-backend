@@ -8,10 +8,13 @@ import { InvalidArgumentsException } from '/exception';
  *        properties:
  *          email:
  *            type: string
+ *            default: test@email.com
  *          username:
  *            type: string
+ *            default: test-user
  *          password:
  *            type: string
+ *            default: test-password
  */
 class UserRegisterFormDTO {
   /**
