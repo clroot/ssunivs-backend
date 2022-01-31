@@ -46,3 +46,27 @@ export const consumeUser = async (req, res, next) => {
     }
   }
 };
+
+/**
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ */
+export const isLoggedIn = (req, res, next) => {
+  if (!res.locals.auth.user) {
+    return next(new AuthenticationException('로그인이 필요합니다.'));
+  }
+  return next();
+};
+
+/**
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ */
+export const isNotLoggedIn = (req, res, next) => {
+  if (res.locals.auth.user) {
+    return next(new AuthenticationException('이미 로그인되어 있습니다.'));
+  }
+  return next();
+};
