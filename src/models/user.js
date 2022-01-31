@@ -1,7 +1,8 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt';
 import sequelize from '/database';
 import Post from './post';
+import BaseEntity from './BaseEntity';
 
 /**
  * Enum for User Role
@@ -12,7 +13,7 @@ export const Role = {
   ADMIN: 'ROLE_ADMIN',
 };
 
-class User extends Model {
+class User extends BaseEntity {
   /**
    * @param {string} email
    * @return {Promise<User>}
@@ -23,11 +24,6 @@ class User extends Model {
         email,
       },
     });
-  }
-
-  /** @return {string} */
-  getId() {
-    return this.id;
   }
 
   /** @return {string} */

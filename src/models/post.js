@@ -1,8 +1,9 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes } from 'sequelize';
 import sequelize from '/database';
 import User from './user';
+import BaseEntity from './BaseEntity';
 
-class Post extends Model {
+class Post extends BaseEntity {
   /**
    * @param {Object} payload
    * @param {string} payload.title
