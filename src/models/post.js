@@ -24,7 +24,7 @@ class Post extends BaseEntity {
 
   /** @return {string} */
   getContent() {
-    return this.content;
+    return this.content.toString('utf8');
   }
 
   /** @return {Promise<User>} */
