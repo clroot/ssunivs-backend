@@ -1,10 +1,10 @@
 import { DataTypes, Model } from 'sequelize';
 import bcrypt from 'bcrypt';
 import sequelize from '/database';
+import Post from './post';
 
 /**
  * Enum for User Role
- * @readonly
  * @enum {string}
  * */
 export const Role = {
@@ -43,6 +43,11 @@ class User extends Model {
   /** @return {string} */
   getRole() {
     return this.role;
+  }
+
+  /** @return {Promise<Array<Post>>} */
+  async getPostList() {
+    return await Post.findByWriter(this.getId());
   }
 
   /**

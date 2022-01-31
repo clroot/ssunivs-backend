@@ -22,7 +22,15 @@ class Post extends Model {
     return instance;
   }
 
-  /** @return {number} */
+  static async findByWriter(writerId) {
+    return await Post.findAll({
+      where: {
+        writer_id: writerId,
+      },
+    });
+  }
+
+  /** @return {number,string} */
   getId() {
     return this.id;
   }
@@ -60,7 +68,12 @@ Post.init({
   sequelize,
   modelName: 'Post',
   tableName: 'posts',
-  indexes: [],
+  indexes: [
+    {
+      fields: ['writer_id'],
+      unique: false,
+    },
+  ],
 });
 
 export default Post;

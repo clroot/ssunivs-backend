@@ -41,10 +41,14 @@ describe('Post Model 은', () => {
       });
 
       // then
+      const writer = await post.getWriter();
+      const writerPostList = await writer.getPostList();
+
       expect(await Post.count()).toBeGreaterThan(beforeCounter);
       expect(post.getTitle()).toBe(title);
       expect(post.getContent()).toBe(content);
-      expect(await post.getWriter()).toStrictEqual(testUser);
+      expect(writer).toStrictEqual(testUser);
+      expect(writerPostList.find(iter => iter.getId() === post.getId())).toBeTruthy();
     });
   });
 });
