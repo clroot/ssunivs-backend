@@ -34,10 +34,10 @@ describe('Post Model 은', () => {
       let content = randSentence();
 
       // when
-      const post = await Post.register({
+      const post = await Post.create({
         title,
         content,
-        user: testUser,
+        writer_id: testUser.id,
       });
 
       // then
@@ -47,6 +47,8 @@ describe('Post Model 은', () => {
       expect(await Post.count()).toBeGreaterThan(beforeCounter);
       expect(post.getTitle()).toBe(title);
       expect(post.getContent()).toBe(content);
+      expect(post.getCreatedAt() < new Date()).toBeTruthy();
+      expect(post.getUpdatedAt() < new Date()).toBeTruthy();
       expect(writer).toStrictEqual(testUser);
       expect(writerPostList.find(iter => iter.getId() === post.getId())).toBeTruthy();
     });

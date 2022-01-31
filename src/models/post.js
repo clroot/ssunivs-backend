@@ -4,25 +4,6 @@ import User from './user';
 import BaseEntity from './BaseEntity';
 
 class Post extends BaseEntity {
-  /**
-   * @param {Object} payload
-   * @param {string} payload.title
-   * @param {string} payload.content
-   * @param {User} payload.user
-   * @return {Promise<Post>}
-   */
-  static async register({ title, content, user }) {
-    let instance = await Post.build();
-
-    instance.title = title;
-    instance.content = content;
-    instance.writer_id = user.id;
-
-    await instance.save();
-
-    return instance;
-  }
-
   static async findByWriter(writerId) {
     return await Post.findAll({
       where: {
