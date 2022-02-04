@@ -6,8 +6,8 @@ import UserDTO from './UserDTO';
  *      ReservationDTO:
  *        properties:
  *          date:
- *            type: datetime
- *          reserver:
+ *            type: string
+ *          user:
  *            $ref: '#/components/schemas/UserDTO'
  *          createdAt:
  *            type: date
@@ -20,9 +20,9 @@ class ReservationDTO {
      * @param {import('/models').User} reserver
      * @private
      */
-    constructor(reservation, writer) {
+    constructor(reservation, reserver) {
         this.dateandtime = reservation.getdatetime()
-        this.reserver = UserDTO(reserver)
+        this.user = UserDTO(reserver)
     }
 }
 
