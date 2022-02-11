@@ -1,3 +1,4 @@
+import { response } from 'express';
 import UserDTO from './UserDTO';
 /**
  * @swagger
@@ -17,12 +18,11 @@ import UserDTO from './UserDTO';
 class ReservationDTO {
     /**
      * @param {import('/models').reservation} reservation
-     * @param {import('/models').User} reserver
      * @private
      */
-    constructor(reservation, reserver) {
+    constructor(reservation) {
         this.dateandtime = reservation.getdatetime()
-        this.user = UserDTO(reserver)
+        this.user = response.locals.auth.user()
     }
 }
 
