@@ -1,4 +1,3 @@
-import { Router } from "express";
 import { ReservationDTO } from '/dto';
 import { reservation } from '/models';
 import { ReservationService } from '/service';
