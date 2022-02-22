@@ -6,7 +6,7 @@ import postApi from './post';
 import userApi from './user';
 import { isLoggedIn } from '/lib/middleware';
 import swaggerSpecs from '/lib/swagger';
-
+import reservationApi from './reservation';
 const api = Router();
 
 api.use('/admin', isLoggedIn, adminApi);
@@ -14,5 +14,5 @@ api.use('/auth', authApi);
 api.use('/post', isLoggedIn, postApi);
 api.use('/user', userApi);
 api.use('/docs', swaggerServe, swaggerSetup(swaggerSpecs, { explorer: true }));
-
+api.use('/reservation', reservationApi);
 export default api;
