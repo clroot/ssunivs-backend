@@ -4,10 +4,10 @@
  *    schemas:
  *      PickUpDTO:
  *        properties:
- *          user:
- *            $ref: '#/components/schemas/UserDTO'
- *          visitAt:
+ *         visitAt:
  *            type: string
+ *         user:
+ *            $ref: '#/components/schemas/UserDTO'
  */
 import UserDTO from './UserDTO';
 

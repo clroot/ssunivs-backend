@@ -8,6 +8,7 @@ import { InvalidArgumentsException } from '/exception';
  *        properties:
  *          visitAt:
  *            type: string
+ *            example: 2022-12-08T01:01:08.322Z
  */
 class PickUpRegisterFormDTO {
   /**
