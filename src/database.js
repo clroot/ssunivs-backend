@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize';
 import sqlite3 from 'sqlite3';
 import dotenv from 'dotenv';
+import logger from '/logger';
 
 dotenv.config();
 
@@ -15,7 +16,9 @@ if (process.env.NODE_ENV === 'test' || !DATASOURCE_URL) {
   DATASOURCE_URL = `sqlite:${sqlite3Database}`;
 }
 
-const sequelize = new Sequelize(DATASOURCE_URL);
+const sequelize = new Sequelize(DATASOURCE_URL, {
+  logging: (message) => logger.debug(message),
+});
 
 export const closeDatabase = async () => {
   await sequelize.close();
