@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import winston, { format } from 'winston';
+import winston, { format, transports } from 'winston';
 import 'winston-daily-rotate-file';
 
 const logDir = path.resolve(path.join(__dirname, '/../logs'));
@@ -13,7 +13,11 @@ if (!fs.existsSync(logDir)) {
   fs.mkdirSync(debugLogDir);
 }
 
-const infoTransport = new winston.transports.DailyRotateFile({
+const consoleTransport = new transports.Console({
+  level: 'info',
+});
+
+const infoTransport = new transports.DailyRotateFile({
   level: 'info',
   filename: 'info-%DATE%.log',
   dirname: infoLogDir,
@@ -23,7 +27,7 @@ const infoTransport = new winston.transports.DailyRotateFile({
   maxFiles: '14d',
 });
 
-const errorTransport = new winston.transports.DailyRotateFile({
+const errorTransport = new transports.DailyRotateFile({
   level: 'error',
   filename: 'error-%DATE%.log',
   dirname: errorLogDir,
@@ -33,7 +37,7 @@ const errorTransport = new winston.transports.DailyRotateFile({
   maxFiles: '14d',
 });
 
-const debugTransport = new winston.transports.DailyRotateFile({
+const debugTransport = new transports.DailyRotateFile({
   level: 'debug',
   filename: 'debug-%DATE%.log',
   dirname: debugLogDir,
@@ -54,7 +58,7 @@ const logger = winston.createLogger({
     format.timestamp(),
     logFormat,
   ),
-  transports: [infoTransport, errorTransport, debugTransport],
+  transports: [consoleTransport, infoTransport, errorTransport, debugTransport],
 });
 
 export const stream = {
