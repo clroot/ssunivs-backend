@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import app from './main';
+import logger from './logger';
 import sequelize, { closeDatabase } from './database';
 import { syncAllModel } from './models';
 
@@ -33,5 +34,5 @@ export const closeServer = async (server, callback = undefined) => {
 
 
 startServer().then((server) => {
-  console.log(`Server is started on port ${server.address().port}`);
+  logger.info(`Server is started on port ${server.address().port}`);
 });
