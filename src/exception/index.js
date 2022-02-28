@@ -4,6 +4,7 @@ import logger from '/logger';
 import AuthenticationException from './AuthenticationException';
 import IllegalStateException from './IllegalStateException';
 import InvalidArgumentsException from './InvalidArgumentsException';
+import PostNotFoundException from './PostNotFoundException';
 import UserNotFoundException from './UserNotFoundException';
 import UserDuplicateException from './UserDuplicateException';
 
@@ -25,7 +26,7 @@ export const customErrorHandler = (err, req, res, next) => {
     res.status(httpStatus.BAD_REQUEST);
   } else if (err instanceof AuthenticationException) {
     res.status(httpStatus.UNAUTHORIZED);
-  } else if (err instanceof UserNotFoundException) {
+  } else if (err instanceof UserNotFoundException || err instanceof PostNotFoundException) {
     res.status(httpStatus.NOT_FOUND);
   } else if (err instanceof UserDuplicateException) {
     res.status(httpStatus.CONFLICT);
@@ -58,5 +59,6 @@ export const notFoundErrorHandler = (req, res) => {
 export { default as AuthenticationException } from './AuthenticationException';
 export { default as IllegalStateException } from './IllegalStateException';
 export { default as InvalidArgumentsException } from './InvalidArgumentsException';
+export { default as PostNotFoundException } from './PostNotFoundException';
 export { default as UserDuplicateException } from './UserDuplicateException';
 export { default as UserNotFoundException } from './UserNotFoundException';

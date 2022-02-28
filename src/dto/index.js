@@ -4,6 +4,7 @@ export { default as PageRequestDTO } from './PageRequestDTO';
 export { default as PickUpDTO } from './PickUpDTO';
 export { default as PickUpRegisterFormDTO } from './PickUpRegisterFormDTO';
 export { default as PostDTO } from './PostDTO';
+export { default as PostListDTO } from './PostListDTO';
 export { default as PostRegisterFormDTO } from './PostRegisterFormDTO';
 export { default as UserDTO } from './UserDTO';
 export { default as UserLoginFormDTO } from './UserLoginFormDTO';
