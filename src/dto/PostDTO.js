@@ -6,6 +6,8 @@ import UserDTO from './UserDTO';
  *    schemas:
  *      PostDTO:
  *        properties:
+ *          id:
+ *            type: number
  *          title:
  *            type: string
  *          content:
@@ -24,6 +26,7 @@ class PostDTO {
    * @private
    */
   constructor(payload, writer) {
+    this.id = payload.getId();
     this.title = payload.getTitle();
     this.content = payload.getContent();
     this.writer = new UserDTO(writer);

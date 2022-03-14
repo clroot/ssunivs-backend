@@ -6,6 +6,8 @@ import PageDTO from './PageDTO';
  *    schemas:
  *      PostItem:
  *        properties:
+ *          id:
+ *            type: number
  *          title:
  *            type: string
  *          writer:
@@ -19,7 +21,8 @@ class PostItem {
    * @param {import('/dto').PostDTO} payload
    */
   constructor(payload) {
-    const { title, writer, createdAt } = payload;
+    const { id, title, writer, createdAt } = payload;
+    this.id = id;
     this.title = title;
     this.writer = writer;
     this.createdAt = createdAt;
